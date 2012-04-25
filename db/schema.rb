@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120424224925) do
+ActiveRecord::Schema.define(:version => 20120425141054) do
 
   create_table "addresses", :force => true do |t|
     t.string   "street_1"
@@ -20,9 +20,10 @@ ActiveRecord::Schema.define(:version => 20120424224925) do
     t.string   "city"
     t.string   "state"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.string   "name"
+    t.integer  "visitor_user_id"
   end
 
   create_table "cart_items", :force => true do |t|
@@ -57,12 +58,14 @@ ActiveRecord::Schema.define(:version => 20120424224925) do
 
   create_table "orders", :force => true do |t|
     t.integer  "user_id"
-    t.decimal  "total_price", :precision => 12, :scale => 2
+    t.decimal  "total_price",     :precision => 12, :scale => 2
     t.integer  "address_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
     t.string   "status"
     t.integer  "store_id"
+    t.integer  "visitor_user_id"
+    t.string   "unique_url"
   end
 
   create_table "privileges", :force => true do |t|
@@ -101,10 +104,11 @@ ActiveRecord::Schema.define(:version => 20120424224925) do
   create_table "stores", :force => true do |t|
     t.string   "name"
     t.string   "slug"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "owner_id"
     t.text     "description"
+    t.string   "status",      :default => "pending"
   end
 
   create_table "users", :force => true do |t|
@@ -116,6 +120,13 @@ ActiveRecord::Schema.define(:version => 20120424224925) do
     t.datetime "updated_at",                         :null => false
     t.string   "password_digest"
     t.string   "stripe_id"
+  end
+
+  create_table "visitor_users", :force => true do |t|
+    t.string   "email"
+    t.string   "stripe_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
