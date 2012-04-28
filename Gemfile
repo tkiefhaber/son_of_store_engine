@@ -12,6 +12,7 @@ gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 gem 'bcrypt-ruby'
 gem 'nifty-generators', :group => :development
+gem 'kaminari'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -38,6 +39,7 @@ end
 group :production do
   gem 'pg'
   gem 'thin'
+  gem 'memcache-client'
 end
 
 group :test do
