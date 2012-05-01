@@ -26,15 +26,15 @@
               :class => "btn btn-small" %>
           <% if store.pending? %>
             <%= link_to "Approve", approve_admin_store_path(store), 
-                method: :put, :class => "btn-small btn-success" %>
+                method: :put, :confirm => "Are you sure?", :class => "btn-small btn-success" %>
             <%= link_to "Decline", decline_admin_store_path(store), 
-                method: :put, :class => "btn-small btn-danger" %>
+                method: :put, :confirm => "Are you sure?", :class => "btn-small btn-danger" %>
           <% elsif store.enabled? %>
             <%= link_to "Disable", disable_admin_store_path(store), 
-                method: :put, :class => "btn-small btn-danger" %>
+                method: :put, :confirm => "Are you sure?", :class => "btn-small btn-danger" %>
           <% elsif store.disabled? %>
             <%= link_to "Enable", enable_admin_store_path(store),
-                method: :put, :class => "btn-small btn-success" %>
+                method: :put, :confirm => "Are you sure?", :class => "btn-small btn-success" %>
           <% end %>
         </td>
       </tr>
