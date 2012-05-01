@@ -7,6 +7,7 @@ describe "sorting by categories" do
   let!(:category) { FactoryGirl.create(:category) }
   let!(:user) { FactoryGirl.create(:user) }
   let!(:admin_user) { FactoryGirl.create(:user, :admin => true) }
+  before(:each) { FactoryGirl.create(:store) }
 
   context "creating categories" do
     it "does not allow non-users to create categories" do

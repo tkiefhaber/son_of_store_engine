@@ -4,6 +4,7 @@ require 'spec_helper'
 describe 'using the shopping cart' do
   let(:user) { FactoryGirl.create(:user) }
   let(:product) { FactoryGirl.create(:product) }
+  before(:each) { FactoryGirl.create(:store) }
   context "When I'm on a product page" do
     
     before(:each) { visit store_product_path(product.store, product) }

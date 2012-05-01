@@ -67,6 +67,12 @@ FactoryGirl.define do
     owner_id 1
     status "enabled"
     after_create do |store|
+      product1 = Product.new
+      product1.title = "FakeProduct"
+      product1.description = "i am a fake product"
+      product1.price = "450"
+      product1.image_link = "http://dl.dropbox.com/u/71404227/1694664-p-2x.png"
+      store.products << product1
       user = FactoryGirl.create(:user)
       store.update_attribute(:owner_id, user.id)
     end

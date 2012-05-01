@@ -4,7 +4,7 @@ describe "User" do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user, :email => "test@test.com") }
   let!(:address) { FactoryGirl.create(:address, :user => user) }
-
+  before(:each) { FactoryGirl.create(:store) }
   context "fails login" do
     it "fails login" do
       visit '/login'

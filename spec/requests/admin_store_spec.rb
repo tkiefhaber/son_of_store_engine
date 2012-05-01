@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "the admin stores page", :requests => :admin_store do
   let!(:store) { FactoryGirl.create(:store) }
-
   context "when logged in as admin" do
     let(:admin) { FactoryGirl.create(:user, :admin => true) }
     before(:each) do

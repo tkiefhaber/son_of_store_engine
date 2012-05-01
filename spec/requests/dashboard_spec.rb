@@ -1,20 +1,21 @@
 require 'spec_helper'
 
 describe "Dashboard" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:admin) { FactoryGirl.create(:user, :admin => true) }
-    let(:test_user) { FactoryGirl.create(:user) }
-    let(:test_products) do
-      (1..5).map { FactoryGirl.create(:product) }
-    end
+  before(:each) { FactoryGirl.create(:store) }
+  let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:user, :admin => true) }
+  let(:test_user) { FactoryGirl.create(:user) }
+  let(:test_products) do
+    (1..5).map { FactoryGirl.create(:product) }
+  end
 
-    let(:order_item_1) { FactoryGirl.create(:order_item, :unit_price => 100, :quantity => 2) }
-    let(:order_item_2) { FactoryGirl.create(:order_item, :unit_price => 200, :quantity => 2) }
-    let(:oo) { [order_item_1, order_item_2] }
-    let!(:order) { FactoryGirl.build(:order_with_items) }
+  let(:order_item_1) { FactoryGirl.create(:order_item, :unit_price => 100, :quantity => 2) }
+  let(:order_item_2) { FactoryGirl.create(:order_item, :unit_price => 200, :quantity => 2) }
+  let(:oo) { [order_item_1, order_item_2] }
+  let!(:order) { FactoryGirl.build(:order_with_items) }
 
-    let(:user) { FactoryGirl.create(:user, :full_name => "Darth") }
-    let!(:evil_order) { FactoryGirl.create(:order, :user => user) }
+  let(:user) { FactoryGirl.create(:user, :full_name => "Darth") }
+  let!(:evil_order) { FactoryGirl.create(:order, :user => user) }
   
   describe "admin access" do
     it "requires admin login" do
