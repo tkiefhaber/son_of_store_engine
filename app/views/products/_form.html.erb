@@ -21,11 +21,7 @@
   </p>
 
   <p>
-<<<<<<< HEAD
-    Product Status: <%= select('product', 'activity', [['Enabled', true], ['Disabled', false]]) %>
-=======
     Product Status: <%= select('product', 'activity', [['Active', true], ['Retired', false]]) %>
->>>>>>> ce7572a7ab25663fb5cba315a1fa4ba03233614a
   </p>
 
   <p>
@@ -38,7 +34,10 @@
       </div>
     <% end %>
   </p>
-  <p><%= link_to 'New Category', new_store_category_path %></p>
+  <p><% if current_user.may_manage?(current_store) %>
+    <%= link_to 'New Category', new_store_category_path %>
+    <% end %>
+  </p>
 
   <p>
     <%= p.submit :class => "btn-primary btn-large"%> 
