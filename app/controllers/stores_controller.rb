@@ -16,7 +16,9 @@ class StoresController < ApplicationController
   end
 
   def index
-    @stores = Store.where status: "enabled"
+    @stores = Store.page(params[:page]).where status: "enabled"
+    @random_store = Store.order("RANDOM()").limit(1).first
+    @top_selling = Product.top_selling_for_store(@random_store)
   end
 
   def show
