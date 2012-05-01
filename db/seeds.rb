@@ -23,15 +23,46 @@ second_store_owner = User.create(  full_name: "Tom K",
               email: "tom.kiefhaber@livingsocial.com",
               username: "Git Master" )
 
-first_store = Store.new(name: "Shoe Shop", slug:"shoe_shop", description: "Buy some shoes!!!!")
-first_store.update_attribute(:owner_id, first_store_owner.id)
+third_store_owner = User.create( full_name: "Austen I",
+              password: "hungry",
+              password_confirmation: "hungry",
+              email: "austen.ito@livingsocial.com",
+              username: "Mr Ito" )
+
+fourth_store_owner = User.create( full_name: "Andy G",
+              password: "hungry",
+              password_confirmation: "hungry"
+              email: "andy.glass@livingsocial.com",
+              username: "punforthemoney")
+
+
+
+first_store = Store.new(name: "Shoe Shop", slug: "shoe_shop", description: "Buy some shoes!!!!")
+first_store.update_attribute(:owner_id, second_store_owner.id)
 first_store.update_attribute(:status, "enabled")
 first_store.save!
 
-second_store = Store.new(name: "Crapola Shop", slug:"crapola_shop", description: "Lorem ipsum crapola sit amet")
+second_store = Store.new(name: "Crapola Shop", slug: "crapola_shop", description: "Lorem ipsum crapola sit amet")
 second_store.update_attribute(:owner_id, second_store_owner.id)
 second_store.update_attribute(:status, "enabled")
 second_store.save!
+
+third_store = Store.new(name: "Spam Shack", slug: "spam_shack", description: "The email, not the lunch meat")
+third_store.update_attribute(:owner_id, third_store_owner.id)
+third_store.update_attribute(:status, "enabled")
+third_store.save!
+
+fourth_store = Store.new(name: "The Pun Show", slug: "pun_shop", description: "These pivotal stories are so store-y")
+fourth_store.update_attribute(:owner_id, fourth_store_owner.id)
+fourth_store.update_attribute(:status, "enabled")
+fourth_store.save!
+
+fifth_store = Store.new(name: "Terrible Ideas R Us", slug: "bad_ideas", description: "Sorry, good ideas are next door.")
+fifth_store.update_attribute(:owner_id, first_store_owner.id)
+fifth_store.update_attribute(:status, "enabled")
+fifth_store.save!
+
+
 
 male_category = first_store.categories.create( title: "Male")
 female_category = first_store.categories.create( title: "Female")
@@ -42,7 +73,7 @@ boot_category = first_store.categories.create( title: "Boot")
 
 def seed_products(store, count)
   count.times do |i| 
-    puts "Seeding product #{i}"
+    puts "store #{store.name}, product #{i}" if (i % 10) == 0
     title = Faker::Lorem.words(2).join("#{i}") 
     desc = Faker::Lorem.words(1000).join(" ") 
     link = "http://dl.dropbox.com/u/71404227/100896-p-2x.png"
@@ -53,7 +84,7 @@ end
 
 def seed_users(count)
   count.times do |i|
-    puts "seeding user #{i}"
+    puts "seeding user #{i}" if (i % 10) == 0
     User.create!(  full_name: "full_name#{i}",
               password: "hungry",
               password_confirmation: "hungry",
@@ -65,9 +96,8 @@ end
 
 
 def seed_orders(store, count)
-
   count.times do |i|
-    puts "seeding order #{i}"
+    puts "store #{store.name}, order #{i}" if (i % 10) == 0
     o = store.orders.create(
      user: User.all.sample,
      address: Address.all.sample
@@ -88,7 +118,7 @@ Address.create(  street_1: "100 A Street",
                   user: first_store_owner)
 
 products = first_store.products.create([{ title: 'Moccasin', 
-                       description: 'For that Pokahontas look.', 
+                       description: 'For that Pocahontas look.', 
                              price: 125.00, 
                         image_link: "http://dl.dropbox.com/u/71404227/100896-p-2x.png",
                         categories: [female_category, boot_category]},
@@ -193,14 +223,16 @@ products = first_store.products.create([{ title: 'Moccasin',
                         image_link: "http://dl.dropbox.com/u/71404227/1780225-p-2x.png",
                         categories: [female_category, dress_category]}])
 
-seed_products(second_store, 10000)
 seed_users(500)
-seed_orders(second_store, 5000)
+[second_store, third_store, fourth_store, fifth_store].each do |store|
+  seed_products(store, 25000)
+  seed_orders(store, 1000)
+end
 
 admin_user = User.new(  full_name: "Chad Fowler",
                         password: "hungry",
                         password_confirmation: "hungry",
-                        email: "demoXX+chad@jumpstartlab.com",
+                        email: "demo02+chad@jumpstartlab.com",
                         username: "SaxPlayer" )
 
 admin_user.admin = true
@@ -209,12 +241,12 @@ admin_user.save
 u = User.create!(  full_name: "Matt Yoho",
               password: "hungry",
               password_confirmation: "hungry",
-              email: "demoXX+matt@jumpstartlab.com" )
+              email: "demo02+matt@jumpstartlab.com" )
 
 User.create(  full_name: "Jeff",
               password: "hungry",
               password_confirmation: "hungry",
-              email: "demoXX+jeff@jumpstartlab.com",
+              email: "demo02+jeff@jumpstartlab.com",
               username: "j3" )
 
 Address.create(  street_1: "10 Street",
