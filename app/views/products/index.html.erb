@@ -10,7 +10,7 @@
           <%= link_to "Add to Cart", store_cart_items_path(current_store, 
                                                        :product_id => @top_selling), 
           :method => :post, :remote => true, 
-          :id => "product_#{@top_selling.id}", :class => "btn" %>
+          :id => "product_#{@top_selling.id}", :class => "btn btn-large btn-info" %>
         </div>
       </div>
       <div class="span5">
