@@ -31,7 +31,7 @@ third_store_owner = User.create( full_name: "Austen I",
 
 fourth_store_owner = User.create( full_name: "Andy G",
               password: "hungry",
-              password_confirmation: "hungry"
+              password_confirmation: "hungry",
               email: "andy.glass@livingsocial.com",
               username: "punforthemoney")
 
