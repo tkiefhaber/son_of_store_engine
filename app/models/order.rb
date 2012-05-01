@@ -26,6 +26,11 @@ class Order < ActiveRecord::Base
   after_create :set_default_status
   after_create :generate_unique_url
   after_create :send_confirmation_email
+  after_create :expire_top_seller_cache
+
+  def expire_top_seller_cache
+    Rails.cache.write("#{store.slug}_top_seller", nil)
+  end
 
   def set_default_status
     update_attribute(:status, "pending")
@@ -56,6 +61,10 @@ class Order < ActiveRecord::Base
 
   def email
     (user || visitor_user).email
+  end
+
+  def full_name
+    user ? user.full_name : "Visitor"
   end
 
   def save_with_payment
